@@ -1,0 +1,119 @@
+{
+    "type": "object",
+    "properties": {
+        "UserId": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "GivenName": {
+                    "description": "The given name of the user.",
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "GrantPoweruserPrivileges": {
+                    "description": "Boolean value to determine whether the user is granted Poweruser privileges.",
+                    "enum": [
+                        "TRUE",
+                        "FALSE"
+                    ],
+                    "type": "string"
+                },
+                "Locale": {
+                    "description": "The locale of the user.",
+                    "enum": [
+                        "en",
+                        "fr",
+                        "ko",
+                        "de",
+                        "es",
+                        "ja",
+                        "ru",
+                        "zh_CN",
+                        "zh_TW",
+                        "pt_BR",
+                        "default"
+                    ],
+                    "type": "string"
+                },
+                "StorageRule": {
+                    "description": "The amount of storage for the user.",
+                    "properties": {
+                        "StorageAllocatedInBytes": {
+                            "description": "The amount of storage allocated, in bytes.",
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "StorageType": {
+                            "description": "The type of storage.",
+                            "enum": [
+                                "UNLIMITED",
+                                "QUOTA"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "Surname": {
+                    "description": "The surname of the user.",
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "TimeZoneId": {
+                    "description": "The time zone ID of the user.",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "Type": {
+                    "description": "The type of the user.",
+                    "enum": [
+                        "USER",
+                        "ADMIN",
+                        "POWERUSER",
+                        "MINIMALUSER",
+                        "WORKSPACESUSER"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

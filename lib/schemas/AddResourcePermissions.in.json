@@ -1,0 +1,109 @@
+{
+    "type": "object",
+    "properties": {
+        "ResourceId": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "NotificationOptions": {
+                    "description": "The notification options.",
+                    "properties": {
+                        "EmailMessage": {
+                            "description": "Text value to be included in the email body.",
+                            "format": "password",
+                            "maxLength": 2048,
+                            "minLength": 0,
+                            "type": "string"
+                        },
+                        "SendEmail": {
+                            "description": "Boolean value to indicate an email notification should be sent to the receipients.",
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "Principals": {
+                    "description": "The users, groups, or organization being granted permission.",
+                    "items": {
+                        "description": "Describes the recipient type and ID, if available.",
+                        "properties": {
+                            "Id": {
+                                "description": "The ID of the recipient.",
+                                "maxLength": 256,
+                                "minLength": 1,
+                                "pattern": "[&\\w+-.@]+",
+                                "type": "string"
+                            },
+                            "Role": {
+                                "description": "The role of the recipient.",
+                                "enum": [
+                                    "VIEWER",
+                                    "CONTRIBUTOR",
+                                    "OWNER",
+                                    "COOWNER"
+                                ],
+                                "type": "string"
+                            },
+                            "Type": {
+                                "description": "The type of the recipient.",
+                                "enum": [
+                                    "USER",
+                                    "GROUP",
+                                    "INVITE",
+                                    "ANONYMOUS",
+                                    "ORGANIZATION"
+                                ],
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "Id",
+                            "Type",
+                            "Role"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "Principals"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

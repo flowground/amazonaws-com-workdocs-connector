@@ -1,0 +1,737 @@
+{
+    "title": "Amazon WorkDocs",
+    "description": "<p>The WorkDocs API is designed for the following use cases:</p> <ul> <li> <p>File Migration: File migration applications are supported for users who want to migrate their files from an on-premises or off-premises file system or service. Users can insert files into a user directory structure, as well as allow for basic metadata changes, such as modifications to the permissions of files.</p> </li> <li> <p>Security: Support security applications are supported for users who have additional security needs, such as antivirus or data loss prevention. The API actions, along with AWS CloudTrail, allow these applications to detect when changes occur in Amazon WorkDocs. Then, the application can take the necessary actions and replace the target file. If the target file violates the policy, the application can also choose to email the user.</p> </li> <li> <p>eDiscovery/Analytics: General administrative applications are supported, such as eDiscovery and analytics. These applications can choose to mimic or record the actions in an Amazon WorkDocs site, along with AWS CloudTrail, to replicate data for eDiscovery, backup, or analytical applications.</p> </li> </ul> <p>All Amazon WorkDocs API actions are Amazon authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of IAM users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM user gains full administrative visibility into the entire Amazon WorkDocs site (or as set in the IAM policy). This includes, but is not limited to, the ability to modify file permissions and upload any file to any user. This allows developers to perform the three use cases above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>",
+    "docsUrl": "https://docs.aws.amazon.com/workdocs/",
+    "url": "https://api.apis.guru/v2/specs/amazonaws.com/workdocs/2016-05-01/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://workdocs.amazonaws.com/",
+                    "http://workdocs.amazonaws.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "hmac": {
+                "label": "Authorization (hmac)",
+                "viewClass": "TextFieldView",
+                "note": "Amazon Signature authorization v4"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "DescribeActivities": {
+            "main": "./lib/actions/DescribeActivities.js",
+            "title": "Describes the user activities in a specified time period.",
+            "description": "Describes the user activities in a specified time period.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeActivities.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "InitiateDocumentVersionUpload": {
+            "main": "./lib/actions/InitiateDocumentVersionUpload.js",
+            "title": "<p>Creates a new document object and version object.</p> <p>The client specifies the parent folder ID and name of the document to upload. The ID is optionally specified when creating a new version of an existing document. This is the first step to upload a document. Next, upload the document to the URL returned from the call, and then call <a>UpdateDocumentVersion</a>.</p> <p>To cancel the document upload, call <a>AbortDocumentVersionUpload</a>.</p>",
+            "description": "<p>Creates a new document object and version object.</p> <p>The client specifies the parent folder ID and name of the document to upload. The ID is optionally specified when creating a new version of an existing document. This is the first step to upload a document. Next, upload the document to the URL returned from the call, and then call <a>UpdateDocumentVersion</a>.</p> <p>To cancel the document upload, call <a>AbortDocumentVersionUpload</a>.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/InitiateDocumentVersionUpload.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeleteDocument": {
+            "main": "./lib/actions/DeleteDocument.js",
+            "title": "Permanently deletes the specified document and its associated metadata.",
+            "description": "Permanently deletes the specified document and its associated metadata.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeleteDocument.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetDocument": {
+            "main": "./lib/actions/GetDocument.js",
+            "title": "Retrieves details of a document.",
+            "description": "Retrieves details of a document.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetDocument.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "UpdateDocument": {
+            "main": "./lib/actions/UpdateDocument.js",
+            "title": "Updates the specified attributes of a document. The user must have access to both the document and its parent folder, if applicable.",
+            "description": "Updates the specified attributes of a document. The user must have access to both the document and its parent folder, if applicable.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/UpdateDocument.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetDocumentPath": {
+            "main": "./lib/actions/GetDocumentPath.js",
+            "title": "<p>Retrieves the path information (the hierarchy from the root folder) for the requested document.</p> <p>By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested document and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the names of the parent folders.</p>",
+            "description": "<p>Retrieves the path information (the hierarchy from the root folder) for the requested document.</p> <p>By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested document and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the names of the parent folders.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetDocumentPath.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeDocumentVersions": {
+            "main": "./lib/actions/DescribeDocumentVersions.js",
+            "title": "<p>Retrieves the document versions for the specified document.</p> <p>By default, only active versions are returned.</p>",
+            "description": "<p>Retrieves the document versions for the specified document.</p> <p>By default, only active versions are returned.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeDocumentVersions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AbortDocumentVersionUpload": {
+            "main": "./lib/actions/AbortDocumentVersionUpload.js",
+            "title": "Aborts the upload of the specified document version that was previously initiated by <a>InitiateDocumentVersionUpload</a>. The client should make this call only when it no longer intends to upload the document version, or fails to do so.",
+            "description": "Aborts the upload of the specified document version that was previously initiated by <a>InitiateDocumentVersionUpload</a>. The client should make this call only when it no longer intends to upload the document version, or fails to do so.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AbortDocumentVersionUpload.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetDocumentVersion": {
+            "main": "./lib/actions/GetDocumentVersion.js",
+            "title": "Retrieves version metadata for the specified document.",
+            "description": "Retrieves version metadata for the specified document.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetDocumentVersion.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "UpdateDocumentVersion": {
+            "main": "./lib/actions/UpdateDocumentVersion.js",
+            "title": "<p>Changes the status of the document version to ACTIVE. </p> <p>Amazon WorkDocs also sets its document container to ACTIVE. This is the last step in a document upload, after the client uploads the document to an S3-presigned URL returned by <a>InitiateDocumentVersionUpload</a>. </p>",
+            "description": "<p>Changes the status of the document version to ACTIVE. </p> <p>Amazon WorkDocs also sets its document container to ACTIVE. This is the last step in a document upload, after the client uploads the document to an S3-presigned URL returned by <a>InitiateDocumentVersionUpload</a>. </p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/UpdateDocumentVersion.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CreateComment": {
+            "main": "./lib/actions/CreateComment.js",
+            "title": "Adds a new comment to the specified document version.",
+            "description": "Adds a new comment to the specified document version.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CreateComment.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeleteComment": {
+            "main": "./lib/actions/DeleteComment.js",
+            "title": "Deletes the specified comment from the document version.",
+            "description": "Deletes the specified comment from the document version.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeleteComment.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeComments": {
+            "main": "./lib/actions/DescribeComments.js",
+            "title": "List all the comments for the specified document version.",
+            "description": "List all the comments for the specified document version.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeComments.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CreateFolder": {
+            "main": "./lib/actions/CreateFolder.js",
+            "title": "Creates a folder with the specified name and parent folder.",
+            "description": "Creates a folder with the specified name and parent folder.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CreateFolder.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeleteFolder": {
+            "main": "./lib/actions/DeleteFolder.js",
+            "title": "Permanently deletes the specified folder and its contents.",
+            "description": "Permanently deletes the specified folder and its contents.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeleteFolder.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetFolder": {
+            "main": "./lib/actions/GetFolder.js",
+            "title": "Retrieves the metadata of the specified folder.",
+            "description": "Retrieves the metadata of the specified folder.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetFolder.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "UpdateFolder": {
+            "main": "./lib/actions/UpdateFolder.js",
+            "title": "Updates the specified attributes of the specified folder. The user must have access to both the folder and its parent folder, if applicable.",
+            "description": "Updates the specified attributes of the specified folder. The user must have access to both the folder and its parent folder, if applicable.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/UpdateFolder.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeleteFolderContents": {
+            "main": "./lib/actions/DeleteFolderContents.js",
+            "title": "Deletes the contents of the specified folder.",
+            "description": "Deletes the contents of the specified folder.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeleteFolderContents.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeFolderContents": {
+            "main": "./lib/actions/DescribeFolderContents.js",
+            "title": "<p>Describes the contents of the specified folder, including its documents and subfolders.</p> <p>By default, Amazon WorkDocs returns the first 100 active document and folder metadata items. If there are more results, the response includes a marker that you can use to request the next set of results. You can also request initialized documents.</p>",
+            "description": "<p>Describes the contents of the specified folder, including its documents and subfolders.</p> <p>By default, Amazon WorkDocs returns the first 100 active document and folder metadata items. If there are more results, the response includes a marker that you can use to request the next set of results. You can also request initialized documents.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeFolderContents.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetFolderPath": {
+            "main": "./lib/actions/GetFolderPath.js",
+            "title": "<p>Retrieves the path information (the hierarchy from the root folder) for the specified folder.</p> <p>By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested folder and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the parent folder names.</p>",
+            "description": "<p>Retrieves the path information (the hierarchy from the root folder) for the specified folder.</p> <p>By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested folder and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the parent folder names.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetFolderPath.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeGroups": {
+            "main": "./lib/actions/DescribeGroups.js",
+            "title": "Describes the groups specified by the query. Groups are defined by the underlying Active Directory.",
+            "description": "Describes the groups specified by the query. Groups are defined by the underlying Active Directory.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeGroups.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetCurrentUser": {
+            "main": "./lib/actions/GetCurrentUser.js",
+            "title": "Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.",
+            "description": "Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetCurrentUser.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeRootFolders": {
+            "main": "./lib/actions/DescribeRootFolders.js",
+            "title": "<p>Describes the current user's special folders; the <code>RootFolder</code> and the <code>RecycleBin</code>. <code>RootFolder</code> is the root of user's files and folders and <code>RecycleBin</code> is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.</p> <p>This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html\">Authentication and Access Control for User Applications</a> in the <i>Amazon WorkDocs Developer Guide</i>.</p>",
+            "description": "<p>Describes the current user's special folders; the <code>RootFolder</code> and the <code>RecycleBin</code>. <code>RootFolder</code> is the root of user's files and folders and <code>RecycleBin</code> is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.</p> <p>This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html\">Authentication and Access Control for User Applications</a> in the <i>Amazon WorkDocs Developer Guide</i>.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeRootFolders.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeNotificationSubscriptions": {
+            "main": "./lib/actions/DescribeNotificationSubscriptions.js",
+            "title": "Lists the specified notification subscriptions.",
+            "description": "Lists the specified notification subscriptions.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeNotificationSubscriptions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CreateNotificationSubscription": {
+            "main": "./lib/actions/CreateNotificationSubscription.js",
+            "title": "<p>Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html\">Subscribe to Notifications</a> in the <i>Amazon WorkDocs Developer Guide</i>.</p>",
+            "description": "<p>Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html\">Subscribe to Notifications</a> in the <i>Amazon WorkDocs Developer Guide</i>.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CreateNotificationSubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeleteNotificationSubscription": {
+            "main": "./lib/actions/DeleteNotificationSubscription.js",
+            "title": "Deletes the specified subscription from the specified organization.",
+            "description": "Deletes the specified subscription from the specified organization.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeleteNotificationSubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetResources": {
+            "main": "./lib/actions/GetResources.js",
+            "title": "Retrieves a collection of resources, including folders and documents. The only <code>CollectionType</code> supported is <code>SHARED_WITH_ME</code>.",
+            "description": "Retrieves a collection of resources, including folders and documents. The only <code>CollectionType</code> supported is <code>SHARED_WITH_ME</code>.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetResources.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeleteCustomMetadata": {
+            "main": "./lib/actions/DeleteCustomMetadata.js",
+            "title": "Deletes custom metadata from the specified resource.",
+            "description": "Deletes custom metadata from the specified resource.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeleteCustomMetadata.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CreateCustomMetadata": {
+            "main": "./lib/actions/CreateCustomMetadata.js",
+            "title": "Adds one or more custom properties to the specified resource (a folder, document, or version).",
+            "description": "Adds one or more custom properties to the specified resource (a folder, document, or version).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CreateCustomMetadata.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeleteLabels": {
+            "main": "./lib/actions/DeleteLabels.js",
+            "title": "Deletes the specified list of labels from a resource.",
+            "description": "Deletes the specified list of labels from a resource.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeleteLabels.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CreateLabels": {
+            "main": "./lib/actions/CreateLabels.js",
+            "title": "Adds the specified list of labels to the given resource (a document or folder)",
+            "description": "Adds the specified list of labels to the given resource (a document or folder)",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CreateLabels.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "RemoveAllResourcePermissions": {
+            "main": "./lib/actions/RemoveAllResourcePermissions.js",
+            "title": "Removes all the permissions from the specified resource.",
+            "description": "Removes all the permissions from the specified resource.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/RemoveAllResourcePermissions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeResourcePermissions": {
+            "main": "./lib/actions/DescribeResourcePermissions.js",
+            "title": "Describes the permissions of a specified resource.",
+            "description": "Describes the permissions of a specified resource.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeResourcePermissions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AddResourcePermissions": {
+            "main": "./lib/actions/AddResourcePermissions.js",
+            "title": "Creates a set of permissions for the specified folder or document. The resource permissions are overwritten if the principals already have different permissions.",
+            "description": "Creates a set of permissions for the specified folder or document. The resource permissions are overwritten if the principals already have different permissions.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AddResourcePermissions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "RemoveResourcePermission": {
+            "main": "./lib/actions/RemoveResourcePermission.js",
+            "title": "Removes the permission for the specified principal from the specified resource.",
+            "description": "Removes the permission for the specified principal from the specified resource.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/RemoveResourcePermission.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeUsers": {
+            "main": "./lib/actions/DescribeUsers.js",
+            "title": "<p>Describes the specified users. You can describe all users or filter the results (for example, by status or organization).</p> <p>By default, Amazon WorkDocs returns the first 24 active or pending users. If there are more results, the response includes a marker that you can use to request the next set of results.</p>",
+            "description": "<p>Describes the specified users. You can describe all users or filter the results (for example, by status or organization).</p> <p>By default, Amazon WorkDocs returns the first 24 active or pending users. If there are more results, the response includes a marker that you can use to request the next set of results.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeUsers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CreateUser": {
+            "main": "./lib/actions/CreateUser.js",
+            "title": "Creates a user in a Simple AD or Microsoft AD directory. The status of a newly created user is \"ACTIVE\". New users can access Amazon WorkDocs.",
+            "description": "Creates a user in a Simple AD or Microsoft AD directory. The status of a newly created user is \"ACTIVE\". New users can access Amazon WorkDocs.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CreateUser.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeleteUser": {
+            "main": "./lib/actions/DeleteUser.js",
+            "title": "Deletes the specified user from a Simple AD or Microsoft AD directory.",
+            "description": "Deletes the specified user from a Simple AD or Microsoft AD directory.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeleteUser.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "UpdateUser": {
+            "main": "./lib/actions/UpdateUser.js",
+            "title": "Updates the specified attributes of the specified user, and grants or revokes administrative privileges to the Amazon WorkDocs site.",
+            "description": "Updates the specified attributes of the specified user, and grants or revokes administrative privileges to the Amazon WorkDocs site.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/UpdateUser.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeactivateUser": {
+            "main": "./lib/actions/DeactivateUser.js",
+            "title": "Deactivates the specified user, which revokes the user's access to Amazon WorkDocs.",
+            "description": "Deactivates the specified user, which revokes the user's access to Amazon WorkDocs.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeactivateUser.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ActivateUser": {
+            "main": "./lib/actions/ActivateUser.js",
+            "title": "Activates the specified user. Only active users can access Amazon WorkDocs.",
+            "description": "Activates the specified user. Only active users can access Amazon WorkDocs.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ActivateUser.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

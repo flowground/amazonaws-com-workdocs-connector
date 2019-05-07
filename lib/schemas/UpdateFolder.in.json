@@ -1,0 +1,70 @@
+{
+    "type": "object",
+    "properties": {
+        "FolderId": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "Name": {
+                    "description": "The name of the folder.",
+                    "maxLength": 255,
+                    "minLength": 1,
+                    "pattern": "[\\u0020-\\u202D\\u202F-\\uFFFF]+",
+                    "type": "string"
+                },
+                "ParentFolderId": {
+                    "description": "The ID of the parent folder.",
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "pattern": "[\\w+-.@]+",
+                    "type": "string"
+                },
+                "ResourceState": {
+                    "description": "The resource state of the folder. Only ACTIVE and RECYCLED are accepted values from the API.",
+                    "enum": [
+                        "ACTIVE",
+                        "RESTORING",
+                        "RECYCLING",
+                        "RECYCLED"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

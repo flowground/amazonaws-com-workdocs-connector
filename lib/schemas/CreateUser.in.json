@@ -1,0 +1,118 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "EmailAddress": {
+                    "description": "The email address of the user.",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "pattern": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}",
+                    "type": "string"
+                },
+                "GivenName": {
+                    "description": "The given name of the user.",
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "OrganizationId": {
+                    "description": "The ID of the organization.",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "pattern": "[&\\w+-.@]+",
+                    "type": "string"
+                },
+                "Password": {
+                    "description": "The password of the user.",
+                    "format": "password",
+                    "maxLength": 32,
+                    "minLength": 4,
+                    "pattern": "[\\u0020-\\u00FF]+",
+                    "type": "string"
+                },
+                "StorageRule": {
+                    "description": "The amount of storage for the user.",
+                    "properties": {
+                        "StorageAllocatedInBytes": {
+                            "description": "The amount of storage allocated, in bytes.",
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "StorageType": {
+                            "description": "The type of storage.",
+                            "enum": [
+                                "UNLIMITED",
+                                "QUOTA"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "Surname": {
+                    "description": "The surname of the user.",
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "TimeZoneId": {
+                    "description": "The time zone ID of the user.",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "Username": {
+                    "description": "The login name of the user.",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "pattern": "[\\w\\-+.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]+)?",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Username",
+                "GivenName",
+                "Surname",
+                "Password"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
